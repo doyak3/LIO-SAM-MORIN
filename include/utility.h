@@ -15,8 +15,6 @@
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 
-#include <opencv/cv.h>
-
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
 #include <pcl/search/impl/search.hpp>
@@ -30,6 +28,8 @@
 #include <pcl/filters/voxel_grid.h>
 #include <pcl/filters/crop_box.h> 
 #include <pcl_conversions/pcl_conversions.h>
+
+#include <opencv2/opencv.hpp>
 
 #include <tf/LinearMath/Quaternion.h>
 #include <tf/transform_listener.h>
@@ -343,5 +343,9 @@ float pointDistance(PointType p1, PointType p2)
 {
     return sqrt((p1.x-p2.x)*(p1.x-p2.x) + (p1.y-p2.y)*(p1.y-p2.y) + (p1.z-p2.z)*(p1.z-p2.z));
 }
+
+// ADDED to solve problem about NaN points
+//using PointType = pcl::PointXYZI;
+// --------------------------------------
 
 #endif

@@ -58,7 +58,6 @@ public:
 
         subLaserOdometry = nh.subscribe<nav_msgs::Odometry>("lio_sam/mapping/odometry", 5, &TransformFusion::lidarOdometryHandler, this, ros::TransportHints().tcpNoDelay());
         subImuOdometry   = nh.subscribe<nav_msgs::Odometry>(odomTopic+"_incremental",   2000, &TransformFusion::imuOdometryHandler,   this, ros::TransportHints().tcpNoDelay());
-
         pubImuOdometry   = nh.advertise<nav_msgs::Odometry>(odomTopic, 2000);
         pubImuPath       = nh.advertise<nav_msgs::Path>    ("lio_sam/imu/path", 1);
     }
@@ -463,10 +462,8 @@ public:
 
         imuQueOpt.push_back(thisImu);
         imuQueImu.push_back(thisImu);
-
         if (doneFirstOpt == false)
             return;
-
         double imuTime = ROS_TIME(&thisImu);
         double dt = (lastImuT_imu < 0) ? (1.0 / 500.0) : (imuTime - lastImuT_imu);
         lastImuT_imu = imuTime;
